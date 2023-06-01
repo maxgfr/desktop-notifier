@@ -1,42 +1,191 @@
-import axios from 'axios';
-import { useEffect } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
 
-const URL_TO_FETCH = [
-  'https://pro.alaxione.fr/ajax/rdv_disponible_ajax.php?cookie=lhs2nsnx&idc=83awarpmtabwlbhxd&provenance=web&lang=fr&idprofession=4&idp=571ED6642022Z09Z19X17C40C551B5DA1DC662A5CE&idtyperdv=14274&idlieux=2304&nbpersonne=1&filtreall=',
-  'https://pro.alaxione.fr/ajax/rdv_disponible_ajax.php?cookie=lhs2jsu7&idc=83awarpmtabwlbhxd&provenance=web&lang=fr&idprofession=4&idp=585E963F2022Z09Z07X12C01C3229411187092F43D&idtyperdv=14274&idlieux=2304&nbpersonne=1&filtreall=',
-  'https://pro.alaxione.fr/ajax/rdv_disponible_ajax.php?cookie=lhs2i880&idc=83awarpmtabwlbhxd&provenance=web&lang=fr&idprofession=4&idp=59E6BE7B2022Z09Z07X11C45C2226F732387624554&idtyperdv=14274&idlieux=2304&nbpersonne=1&filtreall=',
-];
+interface NotificationData<T> {
+  availableCondition: string;
+  notificationTitle: string;
+  notificationBody: string;
+  timeInterval: number;
+  urlToFetch: string;
+  responseData?: AxiosResponse<T>;
+}
 
-const TIME_INTERVAL = 1000 * 10;
+export default function Page(): JSX.Element {
+  const [notificationData, setNotificationData] = useState<
+    NotificationData<any>[]
+  >([]);
+  const [processRunning, setProcessRunning] = useState(false);
 
-const NOTIFICATION_TITLE = 'Available';
-const NOTIFICATION_BODY = 'A rendez-vous is available';
+  const handleConfirm = () => {
+    if (notificationData.length > 0) {
+      setProcessRunning(true);
+    }
+  };
 
-export default function Page() {
   const runnable = async () => {
-    const toFetch = URL_TO_FETCH.map((url) => axios.get(url));
-    const jsonResp = await Promise.all(toFetch).then((res) => {
-      return res.map((r) => r.data);
-    });
-    jsonResp.forEach((arr) => {
-      const available = arr[0].success !== 0 || arr[0].code_error !== 1;
-      console.log('Is a rendez-vous available? <=> ', available);
-      if (available) {
-        new Notification(NOTIFICATION_TITLE, {
-          body: NOTIFICATION_BODY,
-        }).onclick = () => {
-          window.focus();
-        };
+    for (const notification of notificationData) {
+      const {
+        availableCondition,
+        notificationTitle,
+        notificationBody,
+        timeInterval,
+        urlToFetch,
+      } = notification;
+      try {
+        const response = await axios.get<any>(urlToFetch);
+        setNotificationData((prevState) =>
+          prevState.map((prevNotification) =>
+            prevNotification.urlToFetch === urlToFetch
+              ? { ...prevNotification, responseData: response }
+              : prevNotification
+          )
+        );
+        const available = eval(availableCondition); // Evaluate the condition dynamically
+        console.log('Is a rendez-vous available? <=> ', available);
+        if (available) {
+          new Notification(notificationTitle, {
+            body: notificationBody,
+          }).onclick = () => {
+            window.focus();
+          };
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    });
+    }
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      runnable();
-    }, TIME_INTERVAL);
-    return () => clearTimeout(timer);
-  }, []);
+    if (processRunning) {
+      const timers: NodeJS.Timeout[] = [];
+      notificationData.forEach((notification) => {
+        const timer = setInterval(() => {
+          runnable();
+        }, notification.timeInterval);
+        timers.push(timer);
+      });
+      return () => {
+        timers.forEach((timer) => clearInterval(timer));
+      };
+    }
+  }, [processRunning, notificationData]);
 
-  return <div />;
+  const handleNotificationChange = (
+    index: number,
+    field: keyof NotificationData<any>,
+    value: any
+  ) => {
+    setNotificationData((prevState) => {
+      const updatedNotificationData = [...prevState];
+      updatedNotificationData[index] = {
+        ...updatedNotificationData[index],
+        [field]: value,
+      };
+      return updatedNotificationData;
+    });
+  };
+
+  const handleAddNotification = () => {
+    setNotificationData((prevState) => [
+      ...prevState,
+      {
+        availableCondition: '',
+        notificationTitle: '',
+        notificationBody: '',
+        timeInterval: 10000, // Default time interval (10 seconds)
+        urlToFetch: '',
+      },
+    ]);
+  };
+
+  const handleRemoveNotification = (index: number) => {
+    setNotificationData((prevState) => {
+      const updatedNotificationData = [...prevState];
+      updatedNotificationData.splice(index, 1);
+      return updatedNotificationData;
+    });
+  };
+
+  return (
+    <div>
+      <div>
+        <h3>Notifications:</h3>
+        {notificationData.map((notification, index) => (
+          <div key={index}>
+            <div>
+              <label>Available Condition:</label>
+              <input
+                type="text"
+                value={notification.availableCondition}
+                onChange={(e) =>
+                  handleNotificationChange(
+                    index,
+                    'availableCondition',
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div>
+              <label>Notification Title:</label>
+              <input
+                type="text"
+                value={notification.notificationTitle}
+                onChange={(e) =>
+                  handleNotificationChange(
+                    index,
+                    'notificationTitle',
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div>
+              <label>Notification Body:</label>
+              <input
+                type="text"
+                value={notification.notificationBody}
+                onChange={(e) =>
+                  handleNotificationChange(
+                    index,
+                    'notificationBody',
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div>
+              <label>Time Interval (in milliseconds):</label>
+              <input
+                type="number"
+                value={notification.timeInterval}
+                onChange={(e) =>
+                  handleNotificationChange(
+                    index,
+                    'timeInterval',
+                    parseInt(e.target.value, 10)
+                  )
+                }
+              />
+            </div>
+            <div>
+              <label>URL to Fetch:</label>
+              <input
+                type="text"
+                value={notification.urlToFetch}
+                onChange={(e) =>
+                  handleNotificationChange(index, 'urlToFetch', e.target.value)
+                }
+              />
+            </div>
+            <button onClick={() => handleRemoveNotification(index)}>
+              Remove
+            </button>
+          </div>
+        ))}
+        <button onClick={handleAddNotification}>Add Notification</button>
+      </div>
+      <button onClick={handleConfirm}>Confirm</button>
+    </div>
+  );
 }
