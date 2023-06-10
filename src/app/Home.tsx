@@ -1,11 +1,19 @@
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Input,
+  Card,
+  CardContent,
+} from '@mui/material';
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import { randomUUID } from 'crypto';
+import { useEffect, useState } from 'react';
 
 type Notification = {
   id: string;
-  title: string;
-  body: string;
   urlToFetch: string;
   responseSaved?: any;
 };
@@ -13,12 +21,26 @@ type Notification = {
 export default function Page() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [timeInterval, setTimeInterval] = useState(10000);
-  const [processRunning, setProcessRunning] = useState(false);
 
-  const runnable = useCallback(() => {
+  const randomUUID = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      // eslint-disable-next-line no-bitwise
+      const r = (Math.random() * 16) | 0;
+      // eslint-disable-next-line no-bitwise
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const runnable = async () => {
     for (let i = 0; i < notifications.length; i += 1) {
       const notification = notifications[i];
-      const { body, title, id, urlToFetch } = notification;
+      const { id, urlToFetch } = notification;
+
+      if (!urlToFetch) {
+        return;
+      }
 
       try {
         let prevNotif: Notification | undefined;
@@ -36,29 +58,39 @@ export default function Page() {
             return prevNotification;
           })
         );
-        if (prevNotif && responseData === prevNotif?.responseSaved) {
-          new Notification(title, {
-            body,
+        if (prevNotif && responseData !== prevNotif?.responseSaved) {
+          new Notification(`${prevNotif?.urlToFetch}`, {
+            body: `The content has changed for ${prevNotif?.urlToFetch}`,
           }).onclick = () => {
             window.focus();
           };
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        setNotifications((prevState) =>
+          prevState.map((prevNotification) => {
+            if (prevNotification.id === id) {
+              return {
+                ...prevNotification,
+                responseSaved: '',
+              };
+            }
+            return prevNotification;
+          })
+        );
       }
     }
-  }, [notifications]);
+  };
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (processRunning) {
-      const timer = setInterval(() => {
-        runnable();
-      }, timeInterval);
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [processRunning, runnable, timeInterval]);
+    const timer = setInterval(() => {
+      runnable();
+    }, timeInterval);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [runnable, timeInterval]);
 
   const handleNotificationChange = (
     id: string,
@@ -101,68 +133,45 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <div>
-        <h3>Notifications:</h3>
-        <div>
-          <label>Time Interval (in milliseconds):</label>
-          <input
+    <Container>
+      <Box sx={{ marginTop: '20px' }}>
+        <Typography variant="h3" component="h1" fontWeight="bold">
+          Desktop Notifier
+        </Typography>
+      </Box>
+      <Box display="flex" flexDirection="column">
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{
+            marginTop: '20px',
+          }}
+          fontWeight="bold"
+        >
+          Notifications
+        </Typography>
+        <FormControl sx={{ marginY: '20px' }}>
+          <InputLabel htmlFor="timeInterval">
+            Time Interval for each call (in seconds):
+          </InputLabel>
+          <Input
+            id="timeInterval"
             type="number"
-            value={timeInterval}
-            onChange={(e) => setTimeInterval(parseInt(e.target.value, 10))}
+            value={timeInterval / 1000}
+            onChange={(e) =>
+              setTimeInterval(parseInt(e.target.value, 10) * 1000)
+            }
           />
-        </div>
-        {processRunning ? (
-          <button type="button" onClick={() => setProcessRunning(false)}>
-            Stop
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => {
-              if (notifications.length === 0) {
-                alert('Add at least one notification');
-              }
-              setProcessRunning(true);
-            }}
-          >
-            Start
-          </button>
-        )}
+        </FormControl>
         {notifications.map((notification) => (
-          <div key={`${notification.id}`}>
-            <div>
-              <label htmlFor="title">Notification Title:</label>
-              <input
-                id="title"
-                type="text"
-                value={notification.title}
-                onChange={(e) =>
-                  handleNotificationChange(
-                    notification.id,
-                    'title',
-                    e.target.value
-                  )
-                }
-              />
-            </div>
-            <div>
-              <label>Notification Body:</label>
-              <input
-                type="text"
-                value={notification.body}
-                onChange={(e) =>
-                  handleNotificationChange(
-                    notification.id,
-                    'body',
-                    e.target.value
-                  )
-                }
-              />
-            </div>
-            <div>
-              <label>URL to Fetch:</label>
-              <input
+          <Box
+            key={`${notification.id}`}
+            sx={{ display: 'flex', marginTop: '30px', flexDirection: 'column' }}
+          >
+            <FormControl sx={{ marginTop: '15px' }}>
+              <InputLabel htmlFor="urlToFetch">URL to fetch</InputLabel>
+              <Input
+                id="urlToFetch"
                 type="text"
                 value={notification.urlToFetch}
                 onChange={(e) =>
@@ -173,19 +182,42 @@ export default function Page() {
                   )
                 }
               />
-            </div>
-            <button
-              type="button"
+            </FormControl>
+            {notification.responseSaved && (
+              <Card sx={{ marginTop: '20px' }}>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    Result
+                  </Typography>
+                  <Typography variant="body2" component="div">
+                    <pre>
+                      {JSON.stringify(notification.responseSaved, null, 2)}
+                    </pre>
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+            <Button
+              variant="text"
               onClick={() => handleRemoveNotification(notification.id)}
+              sx={{
+                marginTop: '15px',
+              }}
             >
               Remove
-            </button>
-          </div>
+            </Button>
+          </Box>
         ))}
-        <button onClick={handleAddNotification} type="button">
+        <Button
+          variant="contained"
+          onClick={handleAddNotification}
+          sx={{
+            marginY: '40px',
+          }}
+        >
           Add Notification
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
 }
