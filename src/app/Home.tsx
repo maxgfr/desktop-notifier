@@ -1,50 +1,44 @@
-import axios, { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { randomUUID } from 'crypto';
 
-interface NotificationData<T> {
-  availableCondition: string;
-  notificationTitle: string;
-  notificationBody: string;
-  timeInterval: number;
+type Notification = {
+  id: string;
+  title: string;
+  body: string;
   urlToFetch: string;
-  responseData?: AxiosResponse<T>;
-}
+  responseSaved?: any;
+};
 
-export default function Page(): JSX.Element {
-  const [notificationData, setNotificationData] = useState<
-    NotificationData<any>[]
-  >([]);
+export default function Page() {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [timeInterval, setTimeInterval] = useState(10000);
   const [processRunning, setProcessRunning] = useState(false);
 
-  const handleConfirm = () => {
-    if (notificationData.length > 0) {
-      setProcessRunning(true);
-    }
-  };
+  const runnable = useCallback(() => {
+    for (let i = 0; i < notifications.length; i += 1) {
+      const notification = notifications[i];
+      const { body, title, id, urlToFetch } = notification;
 
-  const runnable = async () => {
-    for (const notification of notificationData) {
-      const {
-        availableCondition,
-        notificationTitle,
-        notificationBody,
-        timeInterval,
-        urlToFetch,
-      } = notification;
       try {
-        const response = await axios.get<any>(urlToFetch);
-        setNotificationData((prevState) =>
-          prevState.map((prevNotification) =>
-            prevNotification.urlToFetch === urlToFetch
-              ? { ...prevNotification, responseData: response }
-              : prevNotification
-          )
+        let prevNotif: Notification | undefined;
+        const response = await axios.get(urlToFetch);
+        const responseData = JSON.stringify(response.data);
+        setNotifications((prevState) =>
+          prevState.map((prevNotification) => {
+            if (prevNotification.id === id) {
+              prevNotif = structuredClone(prevNotification);
+              return {
+                ...prevNotification,
+                responseSaved: responseData,
+              };
+            }
+            return prevNotification;
+          })
         );
-        const available = eval(availableCondition); // Evaluate the condition dynamically
-        console.log('Is a rendez-vous available? <=> ', available);
-        if (available) {
-          new Notification(notificationTitle, {
-            body: notificationBody,
+        if (prevNotif && responseData === prevNotif?.responseSaved) {
+          new Notification(title, {
+            body,
           }).onclick = () => {
             window.focus();
           };
@@ -53,56 +47,56 @@ export default function Page(): JSX.Element {
         console.error('Error fetching data:', error);
       }
     }
-  };
+  }, [notifications]);
 
   useEffect(() => {
     if (processRunning) {
-      const timers: NodeJS.Timeout[] = [];
-      notificationData.forEach((notification) => {
-        const timer = setInterval(() => {
-          runnable();
-        }, notification.timeInterval);
-        timers.push(timer);
-      });
+      const timer = setInterval(() => {
+        runnable();
+      }, timeInterval);
       return () => {
-        timers.forEach((timer) => clearInterval(timer));
+        clearInterval(timer);
       };
     }
-  }, [processRunning, notificationData]);
+  }, [processRunning, runnable, timeInterval]);
 
   const handleNotificationChange = (
-    index: number,
-    field: keyof NotificationData<any>,
+    id: string,
+    field: keyof Notification,
     value: any
   ) => {
-    setNotificationData((prevState) => {
-      const updatedNotificationData = [...prevState];
-      updatedNotificationData[index] = {
-        ...updatedNotificationData[index],
-        [field]: value,
-      };
-      return updatedNotificationData;
+    setNotifications((prevState) => {
+      const updatedNotifications = prevState.map((notification) => {
+        if (notification.id === id) {
+          return {
+            ...notification,
+            [field]: value,
+          };
+        }
+        return notification;
+      });
+      return updatedNotifications;
     });
   };
 
   const handleAddNotification = () => {
-    setNotificationData((prevState) => [
+    setNotifications((prevState) => [
       ...prevState,
       {
-        availableCondition: '',
-        notificationTitle: '',
-        notificationBody: '',
-        timeInterval: 10000, // Default time interval (10 seconds)
+        title: '',
+        body: '',
         urlToFetch: '',
+        id: randomUUID(),
       },
     ]);
   };
 
-  const handleRemoveNotification = (index: number) => {
-    setNotificationData((prevState) => {
-      const updatedNotificationData = [...prevState];
-      updatedNotificationData.splice(index, 1);
-      return updatedNotificationData;
+  const handleRemoveNotification = (id: string) => {
+    setNotifications((prevState) => {
+      const updatedNotifications = prevState.filter(
+        (notification) => notification.id !== id
+      );
+      return updatedNotifications;
     });
   };
 
@@ -110,31 +104,43 @@ export default function Page(): JSX.Element {
     <div>
       <div>
         <h3>Notifications:</h3>
-        {notificationData.map((notification, index) => (
-          <div key={index}>
+        <div>
+          <label>Time Interval (in milliseconds):</label>
+          <input
+            type="number"
+            value={timeInterval}
+            onChange={(e) => setTimeInterval(parseInt(e.target.value, 10))}
+          />
+        </div>
+        {processRunning ? (
+          <button type="button" onClick={() => setProcessRunning(false)}>
+            Stop
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => {
+              if (notifications.length === 0) {
+                alert('Add at least one notification');
+              }
+              setProcessRunning(true);
+            }}
+          >
+            Start
+          </button>
+        )}
+        {notifications.map((notification) => (
+          <div key={`${notification.id}`}>
             <div>
-              <label>Available Condition:</label>
+              <label htmlFor="title">Notification Title:</label>
               <input
+                id="title"
                 type="text"
-                value={notification.availableCondition}
+                value={notification.title}
                 onChange={(e) =>
                   handleNotificationChange(
-                    index,
-                    'availableCondition',
-                    e.target.value
-                  )
-                }
-              />
-            </div>
-            <div>
-              <label>Notification Title:</label>
-              <input
-                type="text"
-                value={notification.notificationTitle}
-                onChange={(e) =>
-                  handleNotificationChange(
-                    index,
-                    'notificationTitle',
+                    notification.id,
+                    'title',
                     e.target.value
                   )
                 }
@@ -144,26 +150,12 @@ export default function Page(): JSX.Element {
               <label>Notification Body:</label>
               <input
                 type="text"
-                value={notification.notificationBody}
+                value={notification.body}
                 onChange={(e) =>
                   handleNotificationChange(
-                    index,
-                    'notificationBody',
+                    notification.id,
+                    'body',
                     e.target.value
-                  )
-                }
-              />
-            </div>
-            <div>
-              <label>Time Interval (in milliseconds):</label>
-              <input
-                type="number"
-                value={notification.timeInterval}
-                onChange={(e) =>
-                  handleNotificationChange(
-                    index,
-                    'timeInterval',
-                    parseInt(e.target.value, 10)
                   )
                 }
               />
@@ -174,18 +166,26 @@ export default function Page(): JSX.Element {
                 type="text"
                 value={notification.urlToFetch}
                 onChange={(e) =>
-                  handleNotificationChange(index, 'urlToFetch', e.target.value)
+                  handleNotificationChange(
+                    notification.id,
+                    'urlToFetch',
+                    e.target.value
+                  )
                 }
               />
             </div>
-            <button onClick={() => handleRemoveNotification(index)}>
+            <button
+              type="button"
+              onClick={() => handleRemoveNotification(notification.id)}
+            >
               Remove
             </button>
           </div>
         ))}
-        <button onClick={handleAddNotification}>Add Notification</button>
+        <button onClick={handleAddNotification} type="button">
+          Add Notification
+        </button>
       </div>
-      <button onClick={handleConfirm}>Confirm</button>
     </div>
   );
 }
