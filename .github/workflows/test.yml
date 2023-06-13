@@ -18,17 +18,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: npm
+          cache: yarn
 
-      - name: npm install
+      - name: Install dep
         run: |
-          npm install
+          yarn
 
-      - name: npm test
+      - name: Test
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn package
           yarn lint
-          npm exec tsc
-          npm test
+          yarn test
