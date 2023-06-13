@@ -9,6 +9,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-import-module-exports': 'off',
     'no-await-in-loop': 'warn',
+    'no-plusplus': 'warn',
   },
   parserOptions: {
     ecmaVersion: 2020,

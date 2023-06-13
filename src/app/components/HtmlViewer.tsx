@@ -4,8 +4,9 @@ type Props = {
 
 function HtmlViewer({ html }: Props) {
   return (
-    <div
-      dangerouslySetInnerHTML={{ __html: html }}
+    <iframe
+      title="html-viewer"
+      srcDoc={html}
       style={{
         height: '100%',
         width: '100%',

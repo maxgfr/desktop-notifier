@@ -19,6 +19,7 @@ import HtmlViewer from './components/HtmlViewer';
 export default function Page() {
   const [notifications, setNotifications] = useState<Notif[]>([]);
   const [timeInterval, setTimeInterval] = useState(1000);
+  const [threshold, setThreshold] = useState(3);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const runnable = async () => {
@@ -40,10 +41,15 @@ export default function Page() {
         } else {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(response.data, 'text/html');
-          // get html
-          const html = htmlDoc.getElementsByTagName('html')[0];
-          responseInHtml = html.outerHTML;
-          responseData = html.textContent;
+          const content = htmlDoc.querySelector('html');
+          // disable js from content
+          const scripts = content?.querySelectorAll('script');
+          scripts?.forEach((script) => {
+            script.remove();
+          });
+          responseInHtml = content?.innerHTML;
+          const body = htmlDoc.querySelector('body');
+          responseData = body?.textContent;
         }
         setNotifications((prevState) =>
           prevState.map((prevNotification) => {
@@ -60,7 +66,14 @@ export default function Page() {
             return prevNotification;
           })
         );
-        if (comparator(responseData, prevNotif)) {
+        if (
+          comparator({
+            prevRespData: prevNotif?.responseSaved,
+            currentRespData: responseData,
+            iteration: prevNotif?.iteration,
+            threshold: threshold / 100,
+          })
+        ) {
           new Notification(`${prevNotif?.urlToFetch}`, {
             body: `The content has changed for ${prevNotif?.urlToFetch}`,
           }).onclick = () => {
@@ -167,6 +180,23 @@ export default function Page() {
             onChange={(e) => setTimeInterval(parseInt(e.target.value, 10))}
           />
         </FormControl>
+        <FormControl sx={{ marginY: '20px' }}>
+          <InputLabel htmlFor="threshold">
+            Percentage of difference between previous and new html screenshot
+            (in %):
+          </InputLabel>
+          <Input
+            id="threshold"
+            type="number"
+            inputProps={{
+              step: 0.01,
+              min: 0,
+              max: 100,
+            }}
+            value={threshold}
+            onChange={(e) => setThreshold(parseFloat(e.target.value))}
+          />
+        </FormControl>
         {notifications.map((notification) => (
           <Box
             key={`${notification.id}`}
@@ -199,7 +229,7 @@ export default function Page() {
                   </Typography>
                   <Typography variant="body2" component="div">
                     {notification.responseSavedHtml ? (
-                      <Box maxHeight="350px" maxWidth="100%" overflow="auto">
+                      <Box height="500px" maxWidth="100%" overflow="auto">
                         <HtmlViewer html={notification.responseSavedHtml} />
                       </Box>
                     ) : (
