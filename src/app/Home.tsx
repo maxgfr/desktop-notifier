@@ -11,26 +11,14 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-type Notification = {
-  id: string;
-  urlToFetch: string;
-  responseSaved?: any;
-};
+import comparator from './utils/comparator';
+import { Notif } from './types';
+import randomUUID from './utils/randomId';
+import HtmlViewer from './components/HtmlViewer';
 
 export default function Page() {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [timeInterval, setTimeInterval] = useState(10000);
-
-  const randomUUID = () => {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      // eslint-disable-next-line no-bitwise
-      const r = (Math.random() * 16) | 0;
-      // eslint-disable-next-line no-bitwise
-      const v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  };
+  const [notifications, setNotifications] = useState<Notif[]>([]);
+  const [timeInterval, setTimeInterval] = useState(1000);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const runnable = async () => {
@@ -43,9 +31,20 @@ export default function Page() {
       }
 
       try {
-        let prevNotif: Notification | undefined;
+        let prevNotif: Notif | undefined;
+        let responseInHtml: string | undefined;
         const response = await axios.get(urlToFetch);
-        const responseData = JSON.stringify(response.data);
+        let responseData: any;
+        if (response.headers['content-type'].includes('application/json')) {
+          responseData = JSON.stringify(response.data);
+        } else {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(response.data, 'text/html');
+          // get html
+          const html = htmlDoc.getElementsByTagName('html')[0];
+          responseInHtml = html.outerHTML;
+          responseData = html.textContent;
+        }
         setNotifications((prevState) =>
           prevState.map((prevNotification) => {
             if (prevNotification.id === id) {
@@ -53,12 +52,15 @@ export default function Page() {
               return {
                 ...prevNotification,
                 responseSaved: responseData,
+                iteration: prevNotification.iteration + 1,
+                responseSavedHtml: responseInHtml,
+                type: responseInHtml ? 'html' : 'json',
               };
             }
             return prevNotification;
           })
         );
-        if (prevNotif && responseData !== prevNotif?.responseSaved) {
+        if (comparator(responseData, prevNotif)) {
           new Notification(`${prevNotif?.urlToFetch}`, {
             body: `The content has changed for ${prevNotif?.urlToFetch}`,
           }).onclick = () => {
@@ -73,6 +75,7 @@ export default function Page() {
               return {
                 ...prevNotification,
                 responseSaved: '',
+                iteration: prevNotification.iteration + 1,
               };
             }
             return prevNotification;
@@ -94,7 +97,7 @@ export default function Page() {
 
   const handleNotificationChange = (
     id: string,
-    field: keyof Notification,
+    field: keyof Notif,
     value: any
   ) => {
     setNotifications((prevState) => {
@@ -103,6 +106,7 @@ export default function Page() {
           return {
             ...notification,
             [field]: value,
+            iteration: 0,
           };
         }
         return notification;
@@ -119,6 +123,8 @@ export default function Page() {
         body: '',
         urlToFetch: '',
         id: randomUUID(),
+        iteration: 0,
+        type: 'json',
       },
     ]);
   };
@@ -152,15 +158,13 @@ export default function Page() {
         </Typography>
         <FormControl sx={{ marginY: '20px' }}>
           <InputLabel htmlFor="timeInterval">
-            Time Interval for each call (in seconds):
+            Time Interval for each call (in milliseconds):
           </InputLabel>
           <Input
             id="timeInterval"
             type="number"
-            value={timeInterval / 1000}
-            onChange={(e) =>
-              setTimeInterval(parseInt(e.target.value, 10) * 1000)
-            }
+            value={timeInterval}
+            onChange={(e) => setTimeInterval(parseInt(e.target.value, 10))}
           />
         </FormControl>
         {notifications.map((notification) => (
@@ -184,15 +188,25 @@ export default function Page() {
               />
             </FormControl>
             {notification.responseSaved && (
-              <Card sx={{ marginTop: '20px' }}>
+              <Card sx={{ marginTop: '20px', height: '100%' }}>
                 <CardContent>
-                  <Typography variant="h5" component="h2">
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    sx={{ marginBottom: '10px' }}
+                  >
                     Result
                   </Typography>
                   <Typography variant="body2" component="div">
-                    <pre>
-                      {JSON.stringify(notification.responseSaved, null, 2)}
-                    </pre>
+                    {notification.responseSavedHtml ? (
+                      <Box maxHeight="350px" maxWidth="100%" overflow="auto">
+                        <HtmlViewer html={notification.responseSavedHtml} />
+                      </Box>
+                    ) : (
+                      <pre>
+                        {JSON.stringify(notification.responseSaved, null, 2)}
+                      </pre>
+                    )}
                   </Typography>
                 </CardContent>
               </Card>
