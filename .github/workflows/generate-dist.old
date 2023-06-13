@@ -26,8 +26,8 @@ jobs:
       - name: Install and build
         run: |
           npm install
-          npm run postinstall
-          npm run package
+          yarn postinstall
+          yarn package
 
       - name: Publish the app and generate a release based on semantic commit
         uses: softprops/action-gh-release@v1
