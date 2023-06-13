@@ -37,6 +37,14 @@ jobs:
           tag_prefix: ''
           release_branches: main
 
+      - name: Modify version of the package.json
+        uses: maxgfr/github-change-json@main
+        with:
+          key: version
+          value: ${{ steps.tag_version.outputs.new_tag }}
+          path: release/app/package.json
+          commit: true # it will commit the change
+
       - name: Create a GitHub release
         uses: softprops/action-gh-release@v1
         with:
