@@ -2,8 +2,8 @@ name: Publish
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
 
 jobs:
   publish:
@@ -29,13 +29,22 @@ jobs:
           yarn postinstall
           yarn package
 
-      - name: Publish the app and generate a release based on semantic commit
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: ''
+          release_branches: main
+
+      - name: Create a GitHub release
         uses: softprops/action-gh-release@v1
         with:
           files: |
             ./release/*.dmg
             ./release/*.zip
-          tag_name: ${{ github.ref }}
-          body: ${{ github.event.head_commit.message }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
