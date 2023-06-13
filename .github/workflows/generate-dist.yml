@@ -27,10 +27,15 @@ jobs:
         run: |
           npm install
           npm run postinstall
-          npm run build
+          npm run package
 
-      - name: Publish releases
+      - name: Publish the app and generate a release based on semantic commit
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./release/*.dmg
+            ./dist/*.zip
+          tag_name: ${{ github.ref }}
+          body: ${{ github.event.head_commit.message }}
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          npm exec electron-builder -- --publish always --win --mac --linux
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
