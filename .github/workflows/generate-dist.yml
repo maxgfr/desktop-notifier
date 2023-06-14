@@ -7,7 +7,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: publish-${{ github.ref }}      
+  group: publish-${{ github.ref }}
 
 jobs:
   publish:
@@ -41,14 +41,6 @@ jobs:
           tag_prefix: ''
           release_branches: main
 
-      - name: Modify version of the package.json
-        uses: maxgfr/github-change-json@main
-        with:
-          key: version
-          value: ${{ steps.tag_version.outputs.new_tag }}
-          path: release/app/package.json
-          commit: true # it will commit the change
-
       - name: Create a GitHub release
         uses: softprops/action-gh-release@v1
         with:
@@ -61,3 +53,11 @@ jobs:
           body: ${{ steps.tag_version.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Modify version of the package.json
+        uses: maxgfr/github-change-json@main
+        with:
+          key: version
+          value: ${{ steps.tag_version.outputs.new_tag }}
+          path: release/app/package.json
+          commit: true # it will commit the change

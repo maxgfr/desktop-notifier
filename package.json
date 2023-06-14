@@ -8,14 +8,14 @@
     "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
     "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts",
     "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
+    "package:without-apk": "ts-node ./.erb/scripts/clean.js dist && yarn build && electron-builder build --publish never",
     "package": "ts-node ./.erb/scripts/clean.js dist && yarn build && electron-builder build --publish never --win --mac --linux",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "start": "ts-node ./.erb/scripts/check-port-in-use.js && yarn start:renderer",
     "start:main": "cross-env NODE_ENV=development electronmon -r ts-node/register/transpile-only .",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
-    "test": "jest",
-    "create:signing": "electron-builder create-self-signed-cert -p Max"
+    "test": "jest"
   },
   "browserslist": [],
   "prettier": {
@@ -102,7 +102,7 @@
     "css-minimizer-webpack-plugin": "^4.2.2",
     "detect-port": "^1.5.1",
     "electron": "^23.0.0",
-    "electron-builder": "^24.2.1",
+    "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "electronmon": "^2.0.2",
     "eslint": "^8.33.0",
@@ -164,8 +164,7 @@
         ]
       },
       "type": "development",
-      "hardenedRuntime": false,
-      "notarize": false,
+      "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
       "gatekeeperAssess": false
