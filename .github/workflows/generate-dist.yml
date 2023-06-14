@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  cancel-in-progress: true
+  group: publish-${{ github.ref }}      
+
 jobs:
   publish:
     runs-on: ${{ matrix.os }}
