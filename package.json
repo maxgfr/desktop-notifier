@@ -162,8 +162,8 @@
           "x64"
         ]
       },
-      "type": "distribution",
-      "hardenedRuntime": true,
+      "type": "undefined",
+      "hardenedRuntime": false,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
       "gatekeeperAssess": false
