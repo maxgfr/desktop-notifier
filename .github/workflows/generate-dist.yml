@@ -50,7 +50,8 @@ jobs:
         with:
           files: |
             ./release/build/*.dmg
-            ./release/build/*.zip
+            ./release/build/*.exe
+            ./release/build/*.AppImage
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
