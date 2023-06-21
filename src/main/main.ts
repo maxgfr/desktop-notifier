@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -96,8 +96,25 @@ const createWindow = async () => {
     }
   });
 
-  mainWindow.on('closed', () => {
+  mainWindow.on('closed', async () => {
     mainWindow = null;
+  });
+
+  mainWindow.on('close', async (e: Event) => {
+    e.preventDefault();
+
+    if (mainWindow) {
+      const { response } = await dialog.showMessageBox(mainWindow, {
+        type: 'question',
+        title: '  Confirm  ',
+        message:
+          'If you close the window, the application will not work. Are you sure you want to close it?',
+        buttons: ['Yes', 'No'],
+      });
+      if (response === 0) {
+        mainWindow.destroy();
+      }
+    }
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);
