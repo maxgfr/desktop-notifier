@@ -1,6 +1,6 @@
 {
   "name": "desktop-notifier",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A desktop app which sent a notification when a trigger is sent",
   "license": "MIT",
   "main": "./dist/main/main.js",
