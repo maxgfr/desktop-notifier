@@ -1,11 +1,12 @@
 repo_name: maxgfr/desktop-notifier
 report_id: dca29340244a47dd016ccdf26d95b8bd
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-10T09:51:41+00:00'
+timestamp: '2024-01-05T08:57:05+00:00'
 requested_by: maxgfr
 provider: github
 branch: main
-detected_tools_count: 65
+detected_tools_count: 66
 tools:
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/maxgfr/desktop-notifier
   detection_source: Repo Metadata
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
@@ -26,6 +28,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/maxgfr/desktop-notifier
   detection_source: Repo Metadata
 - name: Electron
   description: Build cross platform desktop apps with JavaScript, HTML, and CSS
@@ -37,7 +40,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Cross-Platform Desktop Development
   image_url: https://img.stackshare.io/service/2946/default_18a71b65e69d7aef5f218ae07f64eb6e1594c444.jpg
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -50,6 +53,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/package.json
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-13 18:29:33.000000000 Z
@@ -63,7 +67,7 @@ tools:
   category: Libraries
   sub_category: Javascript UI Libraries
   image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -77,7 +81,7 @@ tools:
   category: Libraries
   sub_category: JavaScript Framework Components
   image_url: https://img.stackshare.io/service/3350/8261421.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -90,6 +94,7 @@ tools:
   category: Languages & Frameworks
   sub_category: CSS Pre-processors / Extensions
   image_url: https://img.stackshare.io/service/8074/default_d2b16fd6997fb2e164de645a34f9b8d5a880d999.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/package.json
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -102,7 +107,8 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
-  detection_source: package.json
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/.erb/configs/.eslintrc
+  detection_source: ".erb/configs/.eslintrc"
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
 - name: Git
@@ -113,6 +119,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier
   detection_source: Repo Metadata
 - name: GitHub Actions
   description: Automate your workflow from idea to production
@@ -122,7 +129,8 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
-  detection_source: ".github/workflows/test.yml"
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/.github/workflows/codeql-analysis.yml
+  detection_source: ".github/workflows/codeql-analysis.yml"
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
 - name: Jest
@@ -135,7 +143,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Javascript Testing Framework
   image_url: https://img.stackshare.io/service/830/jest.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -149,7 +157,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -163,7 +171,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: JS Build Tools / JS Task Runners
   image_url: https://img.stackshare.io/service/1682/IMG_4636.PNG
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -175,7 +183,8 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/5848/44mC-kJ3.jpg
-  detection_source: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/release/app/yarn.lock
+  detection_source: release/app/yarn.lock
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
 - name: npm
@@ -186,6 +195,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/package.json
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -199,7 +209,7 @@ tools:
   category: Libraries
   sub_category: Javascript Utilities & Libraries
   image_url: https://img.stackshare.io/no-img-open-source.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -209,6 +219,7 @@ tools:
   open_source: false
   hosted_saas: false
   image_url: https://img.stackshare.io/service/8072/13122722.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/package.json
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -222,7 +233,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16702/default_4b738bf1758d38dddd276589bbea47fca5a990df.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -236,7 +247,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16411/default_aa91da3cee4d961f0eea8ca5de77f399ec7ec794.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -250,7 +261,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/17424/default_1cdcda15ebb7caed879f8340bc212b44c4ec9dac.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -265,7 +276,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16549/default_d522554c6a41cb28d922d6d3ad32ad4afa0e3bb5.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -279,7 +290,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15840/default_004658cda9b38934f2871435e9dc15608c86e8be.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -293,7 +304,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15809/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -307,7 +318,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15894/default_1d65e37e65b7f80761374f0202776043277d505d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:00:39.000000000 Z
@@ -321,7 +332,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15946/default_54b691c123fc8979741e800e4dcd3936c0f3b246.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:00:39.000000000 Z
@@ -335,7 +346,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16593/default_ebd83b4f0415be108d977ea72558b13fd7c5283d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -349,7 +360,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15982/default_8b5680d4e916298d08363c291a0d6e34c07ceb15.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -363,10 +374,24 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15980/default_732016a20524708efe7a4c77497fe9bfeea19ba6.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
+- name: chalk
+  description: Terminal string styling done right
+  package_url: https://www.npmjs.com/chalk
+  version: 2.4.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15813/default_db4a7791d2f1174547374b9b587bc10fec088a5a.png
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
+  detection_source: package.json
+  last_updated_by: maxgfr
+  last_updated_on: 2023-05-18 15:23:29.000000000 Z
 - name: concurrently
   description: Run commands concurrently
   package_url: https://www.npmjs.com/concurrently
@@ -377,7 +402,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16041/default_5fd43aeff4d6a935abc13737de01a0355210499d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-13 18:29:33.000000000 Z
@@ -391,7 +416,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15869/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -405,7 +430,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15828/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -419,7 +444,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16949/default_caea01ce44a5fd1bb200d8fc0f8f2a1695b4e569.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-13 18:29:33.000000000 Z
@@ -434,7 +459,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/17567/default_cce6af1cc5c037d170650dfd256f479915d5a8e4.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -448,7 +473,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15888/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -462,7 +487,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/18380/default_d0ba753d47207ad8f04b02befcab81c50f38718f.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -476,7 +501,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16302/default_97104dc50154593d2dde1d791400955934c9c715.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -490,7 +515,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16743/default_848dc5bc612658cea8d631cff0259d9588c28fea.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -504,7 +529,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15806/default_98aa227f51aa9d787815ec3fd98d0ab2bfebbb91.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-13 18:29:33.000000000 Z
@@ -518,7 +543,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15996/default_7a88bebb451873cc63bd99007de5bd3bb8ef85de.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -532,7 +557,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15845/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -546,7 +571,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15885/default_1d65e37e65b7f80761374f0202776043277d505d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -560,7 +585,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15817/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -574,7 +599,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16149/default_1f3a2fc7d882e29a43394ecdf491b8989ea3f0fa.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -588,7 +613,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15834/default_4479dbac220be99e50e724b2df6cf415241d71fd.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -602,7 +627,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15841/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -616,7 +641,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16206/default_2c2f2c7b016f84c0fad2576cb986cb14a5dbbc2f.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -630,7 +655,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/18413/default_867ef7396016341fd213fa568d6de11cc98fefff.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -644,7 +669,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15992/default_8b5680d4e916298d08363c291a0d6e34c07ceb15.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -658,7 +683,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15808/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -672,7 +697,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16025/default_e25d1fbb04a118c79fb444294461417342bd03bf.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -686,7 +711,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15929/default_ac622bc364a601d766b9a6f6039f191492f54d65.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -700,7 +725,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15807/default_db4a7791d2f1174547374b9b587bc10fec088a5a.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -714,7 +739,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16057/default_5fd43aeff4d6a935abc13737de01a0355210499d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -728,7 +753,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15842/default_b71c906aeda030a5e2f1fe40bf12a93be52404ab.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -742,7 +767,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15822/default_004658cda9b38934f2871435e9dc15608c86e8be.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-10 13:59:54.000000000 Z
@@ -756,7 +781,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/16143/default_def3edb85d7fbd20200a5cd7d0a1679e31bc8b3d.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -771,7 +796,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15864/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -785,7 +810,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15938/default_e0a4fb1126d7400f419f0931cf1669947a5bc552.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -799,7 +824,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15830/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -813,7 +838,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/17311/default_b8b4be8bd54f9619446b80b2bf448c0891101f2a.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -827,7 +852,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15858/default_a2f722724df977d0f7752839e5d8845ab41f69d5.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-05-18 15:23:29.000000000 Z
@@ -842,7 +867,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15991/default_cbd6c289400672b291755183817e9dd6abe1a612.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -856,7 +881,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15826/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -870,7 +895,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15821/default_64690bc3e49bcee57094e51a7a26c620c48dbd82.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
@@ -884,7 +909,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15925/default_e0a4fb1126d7400f419f0931cf1669947a5bc552.png
-  detection_source_url: yarn.lock
+  detection_source_url: https://github.com/maxgfr/desktop-notifier/blob/main/yarn.lock
   detection_source: package.json
   last_updated_by: maxgfr
   last_updated_on: 2023-06-14 01:22:39.000000000 Z
