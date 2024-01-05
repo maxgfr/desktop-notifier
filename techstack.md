@@ -1,7 +1,8 @@
 <!--
---- Readme.md Snippet without images Start ---
+&lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
 maxgfr/desktop-notifier is built on the following main stack:
+
 - [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
 - [React](https://reactjs.org/) – Javascript UI Libraries
@@ -18,11 +19,13 @@ maxgfr/desktop-notifier is built on the following main stack:
 - [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet without images End ---
 
---- Readme.md Snippet with images Start ---
+&lt;--- Readme.md Snippet without images End ---&gt;
+
+&lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
 maxgfr/desktop-notifier is built on the following main stack:
+
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
 - <img width='25' height='25' src='https://img.stackshare.io/service/1020/OYIaJ1KK.png' alt='React'/> [React](https://reactjs.org/) – Javascript UI Libraries
@@ -39,14 +42,15 @@ maxgfr/desktop-notifier is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet with images End ---
+
+&lt;--- Readme.md Snippet with images End ---&gt;
 -->
 <div align="center">
 
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [maxgfr/desktop-notifier](https://github.com/maxgfr/desktop-notifier)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|65<br/>Tools used|11/10/23 <br/>Report generated|
+|66<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -207,9 +211,9 @@ Full tech stack [here](/techstack.md)
 </table>
 
 
-## <img src='https://img.stackshare.io/group.svg' /> Open source packages (48)</h2>
+## <img src='https://img.stackshare.io/group.svg' /> Open source packages (49)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (48)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (49)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
@@ -224,6 +228,7 @@ Full tech stack [here](/techstack.md)
 |[@types/react-test-renderer](https://www.npmjs.com/@types/react-test-renderer)|v18.0.0|06/14/23|maxgfr |MIT|N/A|
 |[@typescript-eslint/eslint-plugin](https://www.npmjs.com/@typescript-eslint/eslint-plugin)|v5.59.6|06/14/23|maxgfr |MIT|N/A|
 |[@typescript-eslint/parser](https://www.npmjs.com/@typescript-eslint/parser)|v5.59.6|06/14/23|maxgfr |BSD-2-Clause|N/A|
+|[chalk](https://www.npmjs.com/chalk)|v2.4.2|05/18/23|maxgfr |MIT|N/A|
 |[concurrently](https://www.npmjs.com/concurrently)|v7.6.0|06/13/23|maxgfr |MIT|N/A|
 |[core-js](https://www.npmjs.com/core-js)|v3.30.2|05/18/23|maxgfr |MIT|N/A|
 |[cross-env](https://www.npmjs.com/cross-env)|v7.0.3|05/18/23|maxgfr |MIT|N/A|
@@ -265,4 +270,4 @@ Full tech stack [here](/techstack.md)
 <br/>
 <div align='center'>
 
-Generated via [Stack File](https://github.com/apps/stack-file)
+Generated via [Stack File](https://github.com/marketplace/stack-file)
